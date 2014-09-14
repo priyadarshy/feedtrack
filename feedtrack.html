@@ -1,0 +1,12 @@
+<head>
+  <title>feedtrack</title>
+</head>
+
+<body>
+  <h1>Welcome to Feedtrack!</h1>
+  {{> insertFeedbackForm}}
+</body>
+
+<template name="insertFeedbackForm">
+  {{> quickForm collection="Feedback" id="insertFeedbackForm" type="insert"}}
+</template>
