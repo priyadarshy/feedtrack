@@ -3,15 +3,45 @@
 </head>
 
 <body>
-  <h1>Welcome to Feedtrack!</h1>
-  {{> showFeedback}}
-
-  <p> This is where you insert more feedback. </p>
-  {{> insertFeedbackForm}}
+    {{> loginOrDashboard}}
 </body>
 
+<template name="loginOrDashboard">
+
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom:30px;">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">Feedtrack</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            {{#if loggedIn}}
+              <li class="active"><a href="./" id="logout">Logout {{username}}</a></li>
+              {{else}}
+              {{> loginButtons}}
+              {{/if}}
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+    
+
+    <div class="container-fluid">
+        <div class="row">
+    {{#if loggedIn}}
+        {{> showFeedback}}
+        <h2> Add more feedback. </h2>
+        {{> insertFeedbackForm}}
+    {{/if}}
+    </div>
+    </div>
+
+</template>
+
+
 <template name="showFeedback">
-    <table class="table table-striped">
+<table class="table table-striped">
     <thead>
         <tr>
             <th>userId</th>
@@ -42,7 +72,18 @@
 </template>
 
 <template name="insertFeedbackForm">
-  {{> quickForm collection="Feedback" id="insertFeedbackForm" type="insert"}}
+  {{#autoForm collection="Feedback" id="insertFeedbackForm" type="insert"}}
+    <fieldset>
+        <legend> Insert Feedback </legend>
+        {{> afQuickField name='userId'}}
+        {{> afQuickField name='name'}}
+        {{> afQuickField name='email'}}
+        {{> afQuickField name='content'}}
+        {{> afQuickField name='contactNext'}}
+        {{> afQuickField name='tags'}}
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Insert</button>
+  {{/autoForm}}
 </template>
 
 <template name="updateFeedbackForm">

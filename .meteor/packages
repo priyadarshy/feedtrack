@@ -8,5 +8,7 @@ autopublish
 insecure
 aldeed:autoform
 aldeed:collection2
-bootstrap
+accounts-password
+accounts-ui
+mizzao:bootstrap-3
 

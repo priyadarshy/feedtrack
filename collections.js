@@ -1,6 +1,16 @@
 Feedback = new Meteor.Collection("feedback")
 
 Feedback.attachSchema(new SimpleSchema({
+    accountId: {
+        type: String,
+        autoValue: function() {
+            if (this.isInsert) {
+                return Meteor.userId();
+            } else {
+                this.unset();
+            }
+        }
+    },
     name: {
         type: String,
         label: "User's Name",
