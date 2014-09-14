@@ -1,23 +1,19 @@
 if (Meteor.isClient) {
-  // counter starts at 0
-  Session.setDefault("counter", 0);
 
-  Template.hello.helpers({
-    counter: function () {
-      return Session.get("counter");
-    }
-  });
+    Template.updateFeedbackForm.helpers({
+      editingDoc: function editingDocHelper() {
+        return Feedback.findOne({_id: Session.get("selectedDocId")});
+      }
+    });
 
-  Template.hello.events({
-    'click button': function () {
-      // increment the counter when button is clicked
-      Session.set("counter", Session.get("counter") + 1);
-    }
-  });
+    Template.showFeedback.helpers({
+        allFeedback: function allFeedbackHelper() {
+            return Feedback.find().fetch();
+        }
+    });
 }
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
-    // code to run on server at startup
   });
 }

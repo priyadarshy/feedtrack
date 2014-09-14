@@ -4,9 +4,48 @@
 
 <body>
   <h1>Welcome to Feedtrack!</h1>
+  {{> showFeedback}}
+
+  <p> This is where you insert more feedback. </p>
   {{> insertFeedbackForm}}
 </body>
+
+<template name="showFeedback">
+    <table class="table table-striped">
+    <thead>
+        <tr>
+            <th>userId</th>
+            <th>User Name</th>
+            <th>E-mail</th>
+            <th>Feedback</th>
+            <th>Contact Next</th>
+            <th>Tags</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each allFeedback}}
+        <tr>
+            <td>{{this.userId}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.content}}</td>
+            <td>{{this.contactNext}}</td>
+            <td>
+                {{#each this.tags}}
+                    <span class="label label-info">{{this}}</span>
+                {{/each}}
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+    </table>
+</template>
 
 <template name="insertFeedbackForm">
   {{> quickForm collection="Feedback" id="insertFeedbackForm" type="insert"}}
 </template>
+
+<template name="updateFeedbackForm">
+  {{> quickForm collection="Feedback" doc=editingDoc id="updateFeedbackForm" type="update"}}
+</template>
+
