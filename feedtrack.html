@@ -8,8 +8,7 @@
 
 <template name="loginOrDashboard">
 
-
-    <div class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom:30px;">
+    <div class="navbar navbar-default" role="navigation" style="margin-bottom:30px;">
       <div class="container">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">Feedtrack</a>
@@ -27,20 +26,27 @@
     </div>
     
 
-    <div class="container-fluid">
-        <div class="row">
     {{#if loggedIn}}
-        {{> showFeedback}}
-        <h2> Add more feedback. </h2>
+    <div class="container">
+        <div class="row">
+        <div class="col-md-3" style="border-right-width: 1px; border-right-style: solid;">
         {{> insertFeedbackForm}}
+        </div>
+        <div class="col-md-9">
+        {{> showFeedback}}
+        </div>
+    </div>
+    </div>
     {{/if}}
-    </div>
-    </div>
 
 </template>
 
 
 <template name="showFeedback">
+<div class="bs-callout bs-callout-info">
+    <h4>Current Feedback.</h4>
+    <p>Here's what you've learned so far!</p>
+  </div>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -72,6 +78,7 @@
 </template>
 
 <template name="insertFeedbackForm">
+<div class="input-group">
   {{#autoForm collection="Feedback" id="insertFeedbackForm" type="insert"}}
     <fieldset>
         <legend> Insert Feedback </legend>
@@ -84,6 +91,7 @@
     </fieldset>
     <button type="submit" class="btn btn-primary">Insert</button>
   {{/autoForm}}
+</div>
 </template>
 
 <template name="updateFeedbackForm">
